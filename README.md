@@ -16,6 +16,8 @@ The final neural network architecture had 4 input layers (t,x,V,D), 9 hidden lay
 The network required ~90 minutes to train on an *Intel(R) Xeon(R) CPU @ 2.30GHz*.
 The PINN is highly accurate in regions of high concentration and where the convection is well balanced with the diffusion and can solve the equation 8-9x quicker than a forward scheme.
 
+Attached shows the solution for *D=0.2 m^2 s^-1* and *V=0.4 m s^-1*
+
 ![GitHub Logo](/result.png)
 
 To implement this code, pretrained weights are provided so that the user does not need to retrain the PINN. Parse the argument 'No' to use these pretrained network weights and explore the solution by changing various parameters in the `if __name__ == "main"`

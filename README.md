@@ -14,7 +14,7 @@ so that it can then be implemented within engineering software platforms and the
 
 The final neural network architecture had 4 input layers (t,x,V,D), 9 hidden layers, each with 20 neurons, and 1 output layer, u.
 The network required ~90 minutes to train on an *Intel(R) Xeon(R) CPU @ 2.30GHz*.
-The PINN is highly accurate in regions where the convection is well balanced with the diffusion and can solve the equation 8-9x quicker than a forward scheme.
+The PINN is highly accurate in regions of high concentration and where the convection is well balanced with the diffusion and can solve the equation 8-9x quicker than a forward scheme.
 
 ![GitHub Logo](/result.png)
 

@@ -96,6 +96,7 @@ def plot_contour(
     cs1 = plt.contourf(t,x,u,cmap = cmap,levels = levels)
     plt.xlabel(r'$t$')
     plt.ylabel(r'$x$')
+    plt.xlim(right = Tmax)
     cbar = plt.colorbar(cs1)
     cbar.set_label(r'$\theta(t,x)$')
     

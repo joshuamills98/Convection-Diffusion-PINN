@@ -1,7 +1,7 @@
 import tensorflow as tf 
 import numpy as np
-from data_prep import prep_data
 from optimizer import Optimizer
+from smt.sampling_methods import LHS
 
 """
 
@@ -35,16 +35,12 @@ class PINNNondimensional:
         self.x_c = x_c
         self.PINNModel = PINNModel # pass in the already constructed PINNModel
 
-    def prep_data(self, Xrange = (0,1), Trange = (0,1),
-                PeRange = (0.03,30), N_col = 80000, 
-                N_ini = 400, N_bound = 400, 
-                IC = lambda x: np.sin(np.pi*x),
-                BC1 = lambda t: 0, BC2 = lambda t:0):
-
+    def prep_data(self, Xrange=(0,1), Trange=(0,1), 
+                N_col=10000, N_ini=50, N_bound=50, 
+                IC=lambda x: np.sin(np.pi*x),
+                BC1=lambda t: 0, BC2 = lambda t:0):
 
         """
-        Prepares the non-dimensional data for training
-
         Arguments:
             - Xrange: Tuple indicating lower and upper bound of solution domain
             - Trange: Tuple indiciating lower and upper bound of solution domain
@@ -66,32 +62,39 @@ class PINNNondimensional:
         """
 
         """
-        Write x-training data
-        """
-        collocation_limits = np.array([Trange, Xrange, PeRange])
-        sampling = LHS(xlimits=collocation_limits)
+        write x - training data
 
+        """
+
+        collocation_limits = np.array([Trange, Xrange])
+        sampling = LHS(xlimits=collocation_limits)
         t_col = sampling(N_col)
 
-        tx_ini = sampling(N_ini)  
+        tx_ini = np.random.uniform(low= Xrange[0], high=Xrange[1], size=(N_ini,2))  #simulate 50 random points in Xrange for the initial condition
         tx_ini[:,0] = Trange[0]
 
-        tx_bnd = sampling(N_bound)
-        tx_bnd[:,1] = Xrange[1]*np.round(np.random.rand(N_bound,1))     
+        tx_bnd_t = np.random.uniform(low= Trange[0], high=Trange[1], size=(N_bound,1))
+        tx_bnd_x = np.round(np.random.rand(N_bound,1))       #random x-values at 0 or Xmax
+        tx_bnd_x = np.where(tx_bnd_x == 0, Xrange[0], Xrange[1])
+        tx_bnd = np.hstack((tx_bnd_t,tx_bnd_x))
 
 
         """
-        Write y-training data
+        write y- training data
+        
         """
 
         c_col = np.zeros((N_col,1))
-
-        c_ini = IC(tx_ini[:,1]).reshape(-1,1)
         
+        c_ini = IC(tx_ini[:,1]).reshape(-1,1)
+
+
+        #Boundary conditions (very convoluted but works)
         lbound = tx_bnd[tx_bnd[:,1] == Xrange[0]]
         ubound = tx_bnd[tx_bnd[:,1] == Xrange[1]]
+
         tx_bnd = np.vstack((lbound,ubound))
-        lbound[:,0] = BC1(lbound[:,0])  # Implement boundary conditions at upper and lower bounds
+        lbound[:,0] = BC1(lbound[:,0])
         ubound[:,0] = BC2(ubound[:,0])
         c_bnd = np.vstack((lbound,ubound))[:,0].reshape(-1,1)
         boundary = np.hstack((tx_bnd,c_bnd))
@@ -99,12 +102,11 @@ class PINNNondimensional:
         tx_bnd = boundary[:,0:2]
         c_bnd = boundary[:,2].reshape(-1,1)
 
-        """
-        Wrap-up training data to be sent to model
-        """
 
         x_train = [t_col, tx_ini, tx_bnd]
+
         y_train = [c_col, c_ini, c_bnd]
+
         return x_train, y_train
 
 

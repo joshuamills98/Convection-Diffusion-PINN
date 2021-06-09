@@ -15,7 +15,7 @@ so that it can then be implemented within engineering software platforms and the
 The PINN that has been developed nondimensionalizes the equation to give:
 
 ![equation](
-https://latex.codecogs.com/gif.latex%5Cbar%7B%5Ctheta%7D_%7B%5Cbar%7Bt%7D%7D%20&plus;%20%5Cbar%7B%5Ctheta%7D_%7B%5Cbar%7Bx%7D%7D%20%3D%20%5Cfrac%7B1%7D%7BPe%7D%5Cbar%7B%5Ctheta%7D_%7B%5Cbar%7Bx%7D%5Cbar%7Bx%7D%7D)
+https://latex.codecogs.com/gif.latex?%5Cbar%7B%5Ctheta%7D_%7B%5Cbar%7Bt%7D%7D%20&plus;%20%5Cbar%7B%5Ctheta%7D_%7B%5Cbar%7Bx%7D%7D%20%3D%20%5Cfrac%7B1%7D%7BPe%7D%5Cbar%7B%5Ctheta%7D_%7B%5Cbar%7Bx%7D%5Cbar%7Bx%7D%7D)
 
 This relies on an assumption which is detailed in the report.
 

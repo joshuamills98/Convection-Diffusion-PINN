@@ -41,6 +41,7 @@ Attached shows the solution for *D=0.2 m^2 s^-1* and *V=0.4 m s^-1*
 * **plottingtools.py -** Tools for plotting the error and results of the PINN
 * **NNWights-9pickle -** Pre-trained weights with 9 hidden layers and 20 neurons per layer to use for exploration of the solution
 * **PinnNonDimensional.py -** The nondimensionalization takes place here as well as all the data preparation required for training the PINN
+
 To implement this code, pretrained weights are provided so that the user does not need to retrain the PINN. Parse the argument 'No' to use these pretrained network weights and explore the solution by changing various parameters in the `if __name__ == "main"`
 
 

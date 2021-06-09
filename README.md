@@ -1,4 +1,4 @@
-# Convection-Diffusion-PINN
+## Convection-Diffusion-PINN
 These files were developed as part of my Master's Thesis on *Physics-Informed Neural Networks (PINNs) within FLOW*.
 Here, PINNs are used to solve the convection-diffusion PDE in the absence of a source given by:
 
@@ -12,12 +12,23 @@ The goal is for the PINN to learn the solution
 
 so that it can then be implemented within engineering software platforms and the solution does not need to rely on a more computationally taxing numerical method. 
 
+The PINN that has been developed nondimensionalizes the equation to give:
+
+![equation](https://latex.codecogs.com/gif.latex%5Cbar%7B%5Ctheta%7D_%7B%5Cbar%7Bt%7D%7D%20&plus;%20%5Cbar%7B%5Ctheta%7D_%7B%5Cbar%7Bx%7D%7D%20%3D%20%5Cfrac%7B1%7D%7BPe%7D%5Cbar%7B%5Ctheta%7D_%7B%5Cbar%7Bx%7D%5Cbar%7Bx%7D%7D)
+
+This relies on an assumption which is detailed in the report.
+
+The PINN architecture is shown here:
+
+
+![GitHub Logo](/plots/ConvDiffusionNDPINN.png)
+
 The final neural network architecture had 4 input layers (t,x,V,D), 9 hidden layers, each with 20 neurons, and 1 output layer, u.
 The network required ~90 minutes to train on an *Intel(R) Xeon(R) CPU @ 2.30GHz*.
 The PINN is highly accurate in regions of high concentration and where the convection is well balanced with the diffusion and can solve the equation 8-9x quicker than a forward scheme.
 
 Attached shows the solution for *D=0.2 m^2 s^-1* and *V=0.4 m s^-1*
 
-![GitHub Logo](/result.png)
+![GitHub Logo](/plots/result.png)
 
 To implement this code, pretrained weights are provided so that the user does not need to retrain the PINN. Parse the argument 'No' to use these pretrained network weights and explore the solution by changing various parameters in the `if __name__ == "main"`

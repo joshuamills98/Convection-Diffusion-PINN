@@ -34,17 +34,20 @@ In the above diagram, _MSE_u_ is the loss associated with the PINN applied to th
 The network is trained over a series of boundary points to determine _MSE_u_ and collocation points (those placed in the domain of x,t and Pe) to determine _MSE_f_.
 For my training I used over 90,000 collocation, dispersed using latin hypercube sampling below.
 
-
+![GitHub Logo](/plots/DataDistribution.png)
 
 The final neural network architecture had 4 input layers (t,x,V,D), 9 hidden layers, each with 20 neurons, and 1 output layer, u. The PINN was trained over
 The network required ~90 minutes to train on an *Intel(R) Xeon(R) CPU @ 2.30GHz*.
 
 ## <center> **Results** </center>
-The PINN is highly accurate in regions of high concentration and where the convection is well balanced with the diffusion and can solve the equation 8-9x quicker than a forward scheme.
+The PINN is highly accurate in regions of high concentration and where the convection is well balanced with the diffusion and can solve the equation **8-9x quicker** than a forward Euler scheme. 
 
 Attached shows the solution for *D=0.2 m^2 s^-1* and *V=0.4 m s^-1*
 
 ![GitHub Logo](/plots/result.png)
+
+The PINN is most accurate in describing flows with a reasonable balance between convective and diffucsive forces. In regions of high convectivity, the PINN's accuracy drops significantly. This is demonstrated in the accuracy plot below:
+
 
 ## <center> Implementation within FLOW </center>
 

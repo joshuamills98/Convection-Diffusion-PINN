@@ -7,6 +7,8 @@ Within virtual engineering design, simulations are performed with numerical solv
 
 In this particular example I apply the PINN to a common partial-differential equaition that governs fluid flow driven by convection and diffusion. Through the applciation of PINNs I was able to demonstrate a significant speed increase without a substantial drop in accuracy.
 
+NOTE: This readme is fairly brief - for a more detailed explanation of PINNs, I would recommend reviewing [Maziar Riassi's explanation](https://maziarraissi.github.io/PINNs/). 
+
 ## <center> **Methodology** </center>
 
 Here, PINNs are used to solve the convection-diffusion PDE in the absence of a source given by:

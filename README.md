@@ -50,8 +50,13 @@ Attached shows the solution for *D=0.2 m^2 s^-1* and *V=0.4 m s^-1*
 
 The PINN is most accurate in describing flows with a reasonable balance between convective and diffucsive forces. In regions of high convectivity, the PINN's accuracy drops significantly. This is demonstrated in the accuracy plot below:
 
+![GitHub Logo](/plots/Error2.png)
+
+There is a clear trade-off between generalizability and accuracy - further work should seek to combine a hybrid approach where multiple PINNs are used to capture the different regions of the solution (convective/diffusive region).
 
 ## <center> Implementation within FLOW </center>
+
+
 
 # Files
 

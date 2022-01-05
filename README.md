@@ -28,7 +28,7 @@ _Pe_ is the Peclet number and describes the balance between convective and diffu
 
 To train the PINN to solve the PDE, the architecture below was adopted:
 
-![GitHub Logo](/plots/ConvDiffusionNDPINN.png = 250x250)
+![GitHub Logo](/plots/ConvDiffusionNDPINN.png){:height="50%" width="50%"}
 
 The PINN is governed by the following idea: for the Neural Network to be an accurate solution to the underlying PDE, it must satisfy both the boundary conditions of the PDE as well as the underlying PDE itself (given above)
 In the above diagram, _MSE_u_ is the loss associated with the PINN applied to the boundary conditions. The PINN is then passed through a set of differential operators which are used to determine the _MSE_f_. _MSE_f_ is the loss associated with the PINN when used in the PDE, this is called the _Residual Network_. The combination of both these loss terms is used with an optimizer to perform backward propogation and optimize the neural network weights.

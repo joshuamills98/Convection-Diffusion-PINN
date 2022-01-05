@@ -28,7 +28,7 @@ _Pe_ is the Peclet number and describes the balance between convective and diffu
 
 To train the PINN to solve the PDE, the architecture below was adopted:
 <p align="center">
-  <img width="600" height="300" src="/plots/ConvDiffusionNDPINN.png">
+  <img width="700" height="350" src="/plots/ConvDiffusionNDPINN.png">
 </p>
 
 The PINN is governed by the following idea: for the Neural Network to be an accurate solution to the underlying PDE, it must satisfy both the boundary conditions of the PDE as well as the underlying PDE itself (given above)
@@ -37,7 +37,7 @@ In the above diagram, _MSE_u_ is the loss associated with the PINN applied to th
 The network is trained over a series of boundary points to determine _MSE_u_ and collocation points (those placed in the domain of x,t and Pe) to determine _MSE_f_.
 For my training I used over 90,000 collocation, dispersed using latin hypercube sampling below.
 <p align="center">
-  <img width="300" height="300" src="/plots/DataDistribution.png">
+  <img width="500" height="500" src="/plots/DataDistribution.png">
 </p>
 
 The final neural network architecture had 4 input layers (t,x,V,D), 9 hidden layers, each with 20 neurons, and 1 output layer, u. The PINN was trained over
@@ -48,11 +48,14 @@ The PINN is highly accurate in regions of high concentration and where the conve
 
 Attached shows the solution for *D=0.2 m^2 s^-1* and *V=0.4 m s^-1*
 
-![GitHub Logo](/plots/result.png)
-
+<p align="center">
+  <img width="1000" height="500" src="/plots/result.png">
+</p>
 The PINN is most accurate in describing flows with a reasonable balance between convective and diffucsive forces. In regions of high convectivity, the PINN's accuracy drops significantly. This is demonstrated in the accuracy plot below:
 
-![GitHub Logo](/plots/Error2.png)
+<p align="center">
+  <img width="600" height="600" src="/plots/Error2.png">
+</p>
 
 There is a clear trade-off between generalizability and accuracy - further work should seek to combine a hybrid approach where multiple PINNs are used to capture the different regions of the solution (convective/diffusive region).
 

@@ -61,6 +61,9 @@ There is a clear trade-off between generalizability and accuracy - further work 
 
 ## <center> Implementation within FLOW </center>
 
+The PINN was then implemented within the FLOW software and was tested based on it's speed, the GIF below, demonstrates how the PINN can solve the equation with a fairly quick response time (<<0.1 seconds). When using a numerical scheme within the software, the computation is far slower, and the program is less usable.
+
+
 
 
 # Files

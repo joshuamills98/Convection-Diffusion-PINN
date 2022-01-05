@@ -1,4 +1,4 @@
-# <center> **Convection-Diffusion Physics Informed Neural Network** </center>
+# <center> **Using Physics Informed Neural Network to solve the Convection-Diffusion Equation ** </center>
 
 ## <center> **Overview** </center>
 This program was developed as part of my Master's Thesis on *Physics-Informed Neural Networks (PINNs) within FLOW*. [Flow](https://www.theengineeringcompany.com/) is a virtual engineering design platform developed by the Engineering Company. 
@@ -13,8 +13,7 @@ Here, PINNs are used to solve the convection-diffusion PDE in the absence of a s
 
 ![equation](https://latex.codecogs.com/gif.latex?\theta_%7Bt%7D%20%3D%20V\theta_%7Bx%7D&plus;D\theta_%7Bxx%7D)
 
-
-To my knowledge, PINNs have not yet been implemented to solve the convection-diffusion equation and no research performed on allowing the PINN to generalize over a range of system parameters (in this case D and V). The goal is for the PINN to learn the solution 
+To my knowledge, PINNs have not yet been implemented to solve the convection-diffusion equation and no research performed on allowing the PINN to generalize over a range of system parameters (in this case D and V). The goal is for the PINN to learn the solution the above PDE so that:
 
 ![equation](https://latex.codecogs.com/gif.latex?NN%28t%2Cx%2CV%2CD%29%20%5Capprox%20\theta%28t%2Cx%2CV%2CD%29)
 
@@ -23,14 +22,16 @@ The PINN that has been developed nondimensionalizes the equation to give:
 ![equation](
 https://latex.codecogs.com/gif.latex?%5Cbar%7B%5Ctheta%7D_%7B%5Cbar%7Bt%7D%7D%20&plus;%20%5Cbar%7B%5Ctheta%7D_%7B%5Cbar%7Bx%7D%7D%20%3D%20%5Cfrac%7B1%7D%7BPe%7D%5Cbar%7B%5Ctheta%7D_%7B%5Cbar%7Bx%7D%5Cbar%7Bx%7D%7D)
 
-This relies on an assumption which is detailed in the report.
+_Pe_ is the Peclet number and describes the balance between convective and diffusive forces within the fluid flow.
 
-The PINN architecture is shown here:
-
+To train the PINN to solve the PDE, the architecture below was adopted:
 
 ![GitHub Logo](/plots/ConvDiffusionNDPINN.png)
 
-The final neural network architecture had 4 input layers (t,x,V,D), 9 hidden layers, each with 20 neurons, and 1 output layer, u.
+The PINN is governed by the following idea: for the Neural Network to be an accurate solution to the underlying PDE, it must satisfy both the boundary conditions of the PDE as well as the underlying PDE itself (given above)
+In the above diagram, _MSE_u_ is the loss associated with the PINN applied to the boundary conditions. The PINN is then passed through a set of differential opetors which are used to determine the _MSE_f_. _MSE_f_ is the loss associated with the PINN used in the PDE, this is called the _Residual Network_.
+
+The final neural network architecture had 4 input layers (t,x,V,D), 9 hidden layers, each with 20 neurons, and 1 output layer, u. The PINN was trained over
 The network required ~90 minutes to train on an *Intel(R) Xeon(R) CPU @ 2.30GHz*.
 
 ## <center> **Results** </center>

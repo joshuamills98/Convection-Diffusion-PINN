@@ -27,16 +27,18 @@ https://latex.codecogs.com/gif.latex?%5Cbar%7B%5Ctheta%7D_%7B%5Cbar%7Bt%7D%7D%20
 _Pe_ is the Peclet number and describes the balance between convective and diffusive forces within the fluid flow. (The derivation relies on assumptions about the flow, they are detailed in the report).
 
 To train the PINN to solve the PDE, the architecture below was adopted:
-
-<img src="/plots/ConvDiffusionNDPINN.png" width="800" height="400">
+<p align="center">
+  <img width="600" height="300" src="/plots/ConvDiffusionNDPINN.png">
+</p>
 
 The PINN is governed by the following idea: for the Neural Network to be an accurate solution to the underlying PDE, it must satisfy both the boundary conditions of the PDE as well as the underlying PDE itself (given above)
 In the above diagram, _MSE_u_ is the loss associated with the PINN applied to the boundary conditions. The PINN is then passed through a set of differential operators which are used to determine the _MSE_f_. _MSE_f_ is the loss associated with the PINN when used in the PDE, this is called the _Residual Network_. The combination of both these loss terms is used with an optimizer to perform backward propogation and optimize the neural network weights.
 
 The network is trained over a series of boundary points to determine _MSE_u_ and collocation points (those placed in the domain of x,t and Pe) to determine _MSE_f_.
 For my training I used over 90,000 collocation, dispersed using latin hypercube sampling below.
-
-![GitHub Logo](/plots/DataDistribution.png)
+<p align="center">
+  <img width="300" height="300" src="/plots/DataDistribution.png">
+</p>
 
 The final neural network architecture had 4 input layers (t,x,V,D), 9 hidden layers, each with 20 neurons, and 1 output layer, u. The PINN was trained over
 The network required ~90 minutes to train on an *Intel(R) Xeon(R) CPU @ 2.30GHz*.

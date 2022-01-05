@@ -1,4 +1,4 @@
-# <center> **Using Physics Informed Neural Network to solve the Convection-Diffusion Equation ** </center>
+# <center> Using _Physics Informed Neural Network_ to solve the Convection-Diffusion Equation </center>
 
 ## <center> **Overview** </center>
 This program was developed as part of my Master's Thesis on *Physics-Informed Neural Networks (PINNs) within FLOW*. [Flow](https://www.theengineeringcompany.com/) is a virtual engineering design platform developed by the Engineering Company. 
